@@ -28,8 +28,8 @@ module "vpc" {
   }
 
   private_subnet_tags = {
-    "subnet-1a" = { MapPublicIpOnLaunch = "true",  type = "private" }
-    "subnet-1c" = { MapPublicIpOnLaunch = "true",  type = "private" }
+    "subnet-1a" = { MapPublicIpOnLaunch = "true", type = "private" }
+    "subnet-1c" = { MapPublicIpOnLaunch = "true", type = "private" }
     "subnet-1d" = { MapPublicIpOnLaunch = "false", type = "rds" }
   }
 }
