@@ -1,8 +1,3 @@
-locals {
-  region = "ap-northeast-1"
-  app    = "recruit-service-board"
-}
-
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
