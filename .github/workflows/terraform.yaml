@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  OIDC_ARN: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GitHubActionsOIDC
+  OIDC_ARN: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/recruit-info-service-github-actions
 
 permissions:
   id-token: write
