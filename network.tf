@@ -4,24 +4,32 @@ module "vpc" {
   name = "aws-ecs-terraform"
   cidr = "10.0.0.0/16"
 
-  azs             = ["${local.region}a", "${local.region}c, ${local.region}d"]
+  azs             = ["${local.region}a", "${local.region}c", "${local.region}d"]
   public_subnets  = ["10.0.11.0/24", "10.0.12.0/24"]
   private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
 
   public_subnet_names  = ["Public Subnet 1a", "Public Subnet 1c"]
-  private_subnet_names = ["Private Subnet 1a", "Private Subnet 1c", "RDS Private Subnet 1d"]
+  private_subnet_names = ["Private Subnet 1a", "Private Subnet 1c", "${local.app} RDS Private Subnet 1d"]
 
   enable_dns_hostnames = true
   enable_dns_support   = true
 
   enable_nat_gateway = true
+  single_nat_gateway = true
 
-  # NAT Gatewayを特定のサブネットにのみ設置する設定
-  single_nat_gateway        = true
-  enable_single_nat_gateway = true
+  tags = {
+    Terraform   = "true"
+    Environment = "dev"
+  }
+
+  public_subnet_tags = {
+    Terraform   = "true"
+    Environment = "dev"
+  }
+
   private_subnet_tags = {
-    "subnet-1a" = { MapPublicIpOnLaunch = "true", type = "private" }
-    "subnet-1c" = { MapPublicIpOnLaunch = "true", type = "private" }
+    "subnet-1a" = { MapPublicIpOnLaunch = "true",  type = "private" }
+    "subnet-1c" = { MapPublicIpOnLaunch = "true",  type = "private" }
     "subnet-1d" = { MapPublicIpOnLaunch = "false", type = "rds" }
   }
 }
