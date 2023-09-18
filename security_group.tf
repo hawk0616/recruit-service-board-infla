@@ -53,7 +53,7 @@ resource "aws_security_group" "rds" {
   vpc_id      = module.vpc.vpc_id
 
   ingress {
-    description     = "ECSセキュリティグループからMySQL/MariaDBを許可する。"
+    description     = "Allow MySQL from ECS security group"
     from_port       = 3306
     to_port         = 3306
     protocol        = "tcp"
@@ -61,7 +61,7 @@ resource "aws_security_group" "rds" {
   }
 
   egress {
-    description = "すべてのアウトバウンドを許可する。"
+    description = "Allow all outbound traffic"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
