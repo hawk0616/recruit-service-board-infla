@@ -37,7 +37,7 @@ resource "aws_lb_listener_rule" "alb_listener_rule" {
 }
 
 resource "aws_lb_target_group" "target_group" {
-  name        = "${local.app}-target-group"
+  name        = "${local.app}-tg"
   port        = 8080
   protocol    = "HTTP"
   target_type = "ip"
