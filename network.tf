@@ -20,7 +20,7 @@ module "vpc" {
 
 resource "aws_subnet" "rds_subnet_a" {
   vpc_id                  = module.vpc.vpc_id
-  cidr_block              = "10.0.3.0/24"
+  cidr_block              = "10.0.5.0/24"
   availability_zone       = "${local.region}a"
   map_public_ip_on_launch = false
 
@@ -33,7 +33,7 @@ resource "aws_subnet" "rds_subnet_a" {
 
 resource "aws_subnet" "rds_subnet_d" {
   vpc_id                  = module.vpc.vpc_id
-  cidr_block              = "10.0.4.0/24"
+  cidr_block              = "10.0.6.0/24"
   availability_zone       = "${local.region}d"
   map_public_ip_on_launch = false
 
