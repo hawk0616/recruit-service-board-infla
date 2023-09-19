@@ -30,3 +30,13 @@ resource "aws_subnet" "rds_subnet" {
     "Type"                = "rds"
   }
 }
+
+resource "aws_db_subnet_group" "my_db_subnet_group" {
+  name       = "${local.app}-db-subnet-group"
+  subnet_ids = [aws_subnet.rds_subnet.id]
+
+  tags = {
+    Name = "${local.app}-db-subnet-group"
+  }
+}
+
