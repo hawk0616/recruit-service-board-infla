@@ -18,9 +18,22 @@ module "vpc" {
   single_nat_gateway = false
 }
 
-resource "aws_subnet" "rds_subnet" {
+resource "aws_subnet" "rds_subnet_a" {
   vpc_id                  = module.vpc.vpc_id
   cidr_block              = "10.0.3.0/24"
+  availability_zone       = "${local.region}a"
+  map_public_ip_on_launch = false
+
+  tags = {
+    Name                  = "${local.app} RDS Private Subnet 1a"
+    "MapPublicIpOnLaunch" = "false"
+    "Type"                = "rds"
+  }
+}
+
+resource "aws_subnet" "rds_subnet_d" {
+  vpc_id                  = module.vpc.vpc_id
+  cidr_block              = "10.0.4.0/24"
   availability_zone       = "${local.region}d"
   map_public_ip_on_launch = false
 
@@ -33,7 +46,7 @@ resource "aws_subnet" "rds_subnet" {
 
 resource "aws_db_subnet_group" "my_db_subnet_group" {
   name       = "${local.app}-db-subnet-group"
-  subnet_ids = [aws_subnet.rds_subnet.id]
+  subnet_ids = [aws_subnet.rds_subnet_a.id, aws_subnet.rds_subnet_d.id]
 
   tags = {
     Name = "${local.app}-db-subnet-group"
