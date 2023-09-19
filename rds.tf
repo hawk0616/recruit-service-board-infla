@@ -3,6 +3,7 @@ data "aws_ssm_parameter" "rds_password" {
 }
 
 resource "aws_db_instance" "my_db_instance" {
+  db_subnet_group_name = aws_db_subnet_group.my_db_subnet_group.name
   allocated_storage    = 20
   storage_type         = "gp2"
   engine               = "mysql"
