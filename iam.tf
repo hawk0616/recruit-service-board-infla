@@ -54,7 +54,7 @@ resource "aws_iam_role_policy_attachment" "ecs_task_ssm_get_parameter" {
 # For Lambda
 data "aws_iam_policy_document" "lambda" {
   statement {
-    actions   = ["sts:AssumeRole"]
+    actions = ["sts:AssumeRole"]
     principals {
       type        = "Service"
       identifiers = ["lambda.amazonaws.com"]

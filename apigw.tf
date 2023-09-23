@@ -22,7 +22,7 @@ resource "aws_api_gateway_integration" "my_integration" {
   http_method = aws_api_gateway_method.my_method.http_method
 
   credentials = aws_iam_role.apigw_role.arn
-  
+
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
   uri                     = "arn:aws:apigateway:ap-northeast-1:lambda:path/2015-03-31/functions/${aws_lambda_function.my_lambda.arn}/invocations"
