@@ -12,7 +12,3 @@ resource "aws_instance" "bastion_host" {
     Name = "BastionHost"
   }
 }
-
-resource "aws_eip" "bastion_host" {
-  instance = aws_instance.bastion_host.id
-}
