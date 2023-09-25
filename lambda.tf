@@ -1,15 +1,9 @@
-data "archive_file" "lambda_zip" {
-  type        = "zip"
-  source_dir  = "../../api"
-  output_path = "api.zip"
-}
-
 resource "aws_lambda_function" "migrate_function" {
   function_name = "${local.app}-migrate"
   handler       = "index.handler"
   runtime       = "go1.x"
   role          = aws_iam_role.lambda_execution_role.arn
-  filename      = data.archive_file.lambda_zip.output_path
+  filename      = "lambda.zip"
 
   vpc_config {
     subnet_ids         = [aws_subnet.rds_subnet_a.id, aws_subnet.rds_subnet_d.id]
