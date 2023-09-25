@@ -50,26 +50,3 @@ resource "aws_iam_role_policy_attachment" "ecs_task_ssm_get_parameter" {
   policy_arn = aws_iam_policy.ssm_get_parameter.arn
   role       = aws_iam_role.ecs_task.name
 }
-
-# For EC2
-resource "aws_iam_role" "bastion_role" {
-  name = "${local.app}-bastion-role"
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Action = "sts:AssumeRole",
-        Effect = "Allow",
-        Principal = {
-          Service = "ec2.amazonaws.com"
-        }
-      }
-    ]
-  })
-}
-
-resource "aws_iam_instance_profile" "bastion_profile" {
-  name = "${local.app}-bastion-profile"
-  role = aws_iam_role.bastion_role.name
-}
