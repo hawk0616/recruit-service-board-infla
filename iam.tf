@@ -36,7 +36,7 @@ resource "aws_iam_role_policy_attachment" "ecs_basic" {
 data "aws_iam_policy_document" "ssm_get_parameter" {
   statement {
     actions   = ["ssm:GetParameter"]
-    resources = ["arn:aws:ssm:ap-northeast-1:113713103169:parameter//recruit-service-board/rds/*"]
+    resources = ["arn:aws:ssm:ap-northeast-1:113713103169:parameter/recruit-service-board/rds/*"]
   }
 }
 
@@ -51,8 +51,7 @@ resource "aws_iam_role_policy_attachment" "ecs_task_ssm_get_parameter" {
   role       = aws_iam_role.ecs_task.name
 }
 
-# ForLambda
-# iam.tf
+# For Lambda
 data "aws_iam_policy_document" "lambda_assume" {
   statement {
     actions = ["sts:AssumeRole"]
@@ -66,6 +65,12 @@ data "aws_iam_policy_document" "lambda_assume" {
 resource "aws_iam_role" "lambda_execution_role" {
   name               = "${local.app}-lambda-execution"
   assume_role_policy = data.aws_iam_policy_document.lambda_assume.json
+}
+
+resource "aws_lambda_permission" "apigw" {
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.migrate_function.arn
+  principal     = "apigateway.amazonaws.com"
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
