@@ -36,7 +36,7 @@ resource "aws_iam_role_policy_attachment" "ecs_basic" {
 data "aws_iam_policy_document" "ssm_get_parameter" {
   statement {
     actions   = ["ssm:GetParameter"]
-    resources = ["arn:aws:ssm:ap-northeast-1:113713103169:parameter//recruit-service-board/rds/*"]
+    resources = ["arn:aws:ssm:ap-northeast-1:113713103169:parameter/recruit-service-board/rds/*"]
   }
 }
 
@@ -51,8 +51,7 @@ resource "aws_iam_role_policy_attachment" "ecs_task_ssm_get_parameter" {
   role       = aws_iam_role.ecs_task.name
 }
 
-# ForLambda
-# iam.tf
+# For Lambda
 data "aws_iam_policy_document" "lambda_assume" {
   statement {
     actions = ["sts:AssumeRole"]
