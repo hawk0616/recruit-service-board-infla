@@ -1,24 +1,23 @@
-# module "vpc" {
-#   source = "terraform-aws-modules/vpc/aws"
+module "vpc" {
+  source = "terraform-aws-modules/vpc/aws"
 
-#   name = "aws-ecs-terraform"
-#   cidr = "10.0.0.0/16"
+  name = "aws-ecs-terraform"
+  cidr = "10.0.0.0/16"
 
-#   azs             = ["${local.region}a", "${local.region}c"]
-#   public_subnets  = ["10.0.11.0/24", "10.0.12.0/24"]
-#   private_subnets = ["10.0.1.0/24", "10.0.2.0/24"]
+  azs             = ["${local.region}a", "${local.region}c"]
+  public_subnets  = ["10.0.11.0/24", "10.0.12.0/24"]
+  private_subnets = ["10.0.1.0/24", "10.0.2.0/24"]
 
-#   public_subnet_names  = ["Public Subnet 1a", "Public Subnet 1c"]
-#   private_subnet_names = ["Private Subnet 1a", "Private Subnet 1c"]
+  public_subnet_names  = ["Public Subnet 1a", "Public Subnet 1c"]
+  private_subnet_names = ["Private Subnet 1a", "Private Subnet 1c"]
 
-#   enable_dns_hostnames = true
-#   enable_dns_support   = true
+  enable_dns_hostnames = true
+  enable_dns_support   = true
 
-#   enable_nat_gateway = true
-#   single_nat_gateway = false
-# }
+  enable_nat_gateway = true
+  single_nat_gateway = false
+}
 
-# RDSをaのAZに配置
 resource "aws_subnet" "rds_subnet_a" {
   vpc_id                  = module.vpc.vpc_id
   cidr_block              = "10.0.5.0/24"
