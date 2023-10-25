@@ -6,7 +6,7 @@ resource "aws_lambda_function" "migrate_function" {
   filename      = "lambda_binary.zip"
 
   vpc_config {
-    subnet_ids         = [aws_subnet.rds_subnet_a.id, aws_subnet.rds_subnet_cc.id]
+    subnet_ids         = [aws_subnet.rds_subnet_a.id, aws_subnet.rds_subnet_c.id]
     security_group_ids = [aws_security_group.lambda_sg.id]
   }
 }
