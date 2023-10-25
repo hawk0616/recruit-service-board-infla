@@ -120,7 +120,7 @@ resource "aws_ecs_service" "nextjs_ecs_service" {
     container_name   = "${local.app}-nextjs"
     container_port   = 8080
   }
-  depends_on = [aws_lb_listener_rule.nextjs_alb_listener_rule]
+  depends_on = [aws_lb_listener_rule.alb_listener_rule]
 }
 
 resource "aws_ecs_cluster" "nextjs_ecs_cluster" {
