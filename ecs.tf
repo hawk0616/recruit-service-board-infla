@@ -15,7 +15,7 @@
 #       {
 #         "containerPort": 8080
 #       }
-      
+
 #     ],
 #     "healthCheck": {
 #       "command": ["CMD-SHELL", "curl -f http://localhost:8080/health_checks || exit 1"],
